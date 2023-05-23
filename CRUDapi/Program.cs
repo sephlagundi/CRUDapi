@@ -8,7 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 
-builder.Services.AddAuthorization(options => {
+builder.Services.AddAuthorization(options =>
+{
     options.AddPolicy("admin_greetings", policy => policy.RequireAuthenticatedUser());
 });
 
@@ -18,8 +19,8 @@ builder.Services.AddCors(opt =>
 {
     opt.AddPolicy(name: MyAllowSpecificOrigins, policy =>
     {
-        /*policy.AllowAnyOrigin()*/
-        policy.WithOrigins("https://localhost:39326", "mydomain.com")
+        policy.AllowAnyOrigin()
+       /* policy.WithOrigins("https://localhost:39326", "mydomain.com")*/
         .AllowAnyHeader()
        .AllowAnyMethod();
     });

@@ -21,19 +21,6 @@ namespace CRUDapi.Migrations
                     table.PrimaryKey("PK_Employees", x => x.Id);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "UserInfo",
-                columns: table => new
-                {
-                    UserId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserInfo", x => x.UserId);
-                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -41,8 +28,7 @@ namespace CRUDapi.Migrations
             migrationBuilder.DropTable(
                 name: "Employees");
 
-            migrationBuilder.DropTable(
-                name: "UserInfo");
+
         }
     }
 }

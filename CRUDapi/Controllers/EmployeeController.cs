@@ -68,13 +68,54 @@ namespace CRUDapi.Controllers
 
 
 
+        /*
+                [HttpPut("{id}")]
+                public async Task<ActionResult> Update(int id, Employee employee)
+                {
+                    if (id != employee.Id)
+                        return BadRequest();
+
+                    _context.Entry(employee).State = EntityState.Modified;
+                    await _context.SaveChangesAsync();
+
+                    return Ok();
+                    return Ok(employee);
+                }
+        */
+
+
+
+
+        /*        [HttpPut("name/{id}/{name}")]
+                public async Task<ActionResult<int>> UpdateEmployee(int id, string name)
+                {
+                    var result = await _context.Database
+                        .ExecuteSqlRawAsync($"UpdateEmployee {id}, {name}");
+
+        *//*            return Ok(result);*//*
+
+                    if (result > 0)
+                    {
+                        // Delete operation was successful
+                        return Ok(new { message = "Employee update successfully" });
+                    }
+                    else
+                    {
+                        // Delete operation did not affect any rows
+                        return NotFound(new { message = "Employee not found" });
+                    }
+
+                }*/
+
+
+
         [HttpPut("name/{id}/{name}")]
         public async Task<ActionResult<int>> UpdateEmployee(int id, string name)
         {
             var result = await _context.Database
                 .ExecuteSqlRawAsync($"UpdateEmployee {id}, {name}");
 
-            /*return Ok(result);*/
+/*            return Ok(result);*/
 
             if (result > 0)
             {
@@ -91,54 +132,46 @@ namespace CRUDapi.Controllers
 
 
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            var result = await _context.Database
-                .ExecuteSqlRawAsync($"DeleteEmployee {id}");
 
-            if (result > 0)
-            {
-                // Delete operation was successful
-                return Ok(new { message = "Employee deleted successfully" });
-            }
-            else
-            {
-                // Delete operation did not affect any rows
-                return NotFound(new { message = "Employee not found" });
-            }
-        }
-
-
-        /*        [HttpPut("{id}")]
-        public async Task<ActionResult> Update(int id, Employee employee)
-        {
-            if (id != employee.Id)
-                return BadRequest();
-
-            _context.Entry(employee).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-
-            return Ok();
-            return Ok(employee);
-        }*/
 
 
         /*        [HttpDelete("{id}")]
                 public async Task<IActionResult> Delete(int id)
                 {
-                    var employee = await _context.Employees.FindAsync(id);
-                    if (employee == null)
+                    var result = await _context.Database
+                        .ExecuteSqlRawAsync($"DeleteEmployee {id}");
+
+                    if (result > 0)
                     {
-                        return NotFound();
+                        // Delete operation was successful
+                        return Ok(new { message = "Employee deleted successfully" });
                     }
-
-                    _context.Employees.Remove(employee);
-                    await _context.SaveChangesAsync();
-
-                    return Ok();
-
+                    else
+                    {
+                        // Delete operation did not affect any rows
+                        return NotFound(new { message = "Employee not found" });
+                    }
                 }*/
+
+
+
+
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var employee = await _context.Employees.FindAsync(id);
+            if (employee == null)
+            {
+                return NotFound();
+            }
+
+            _context.Employees.Remove(employee);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+
+        }
 
 
     }

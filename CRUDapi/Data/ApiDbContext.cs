@@ -20,7 +20,7 @@ namespace CRUDapi.Data
 
         public virtual DbSet<Employee> Employees { get; set; }
 
-        public virtual DbSet<UserInfo> UserInfo { get; set; }
+
 
 
 
